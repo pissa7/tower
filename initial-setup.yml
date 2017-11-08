@@ -1,6 +1,6 @@
 ---
 - name: Initial setup for nodes
-  hosts: nodes
+  hosts: all
   tasks:
     - name: set timezone to Asia/Seoul
       timezone:
