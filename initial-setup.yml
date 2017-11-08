@@ -1,0 +1,52 @@
+---
+- name: Initial setup for nodes
+  hosts: nodes
+  tasks:
+    - name: set timezone to Asia/Seoul
+      timezone:
+        name: Asia/Seoul
+
+    - name: disable firewalld / NetworkManager services
+      service:
+        name: "{{ item }}"
+        state: stopped
+        enabled: false
+      with_items:
+        - firewalld
+        - NetworkManager
+
+    - name: Copy OSP8 YUM repo file
+      template:
+        src: /etc/ansible/templates/osp.repo
+        dest: /etc/yum.repos.d/osp.repo
+
+    - name: Install NTP
+      yum:
+        name: ntp
+        state: installed
+
+    - name: enabling NTP service on boot up
+      service:
+        name: ntpd
+        state: started
+        enabled: true 
+
+    - name: Copy over the NTP configuration
+      template: 
+        src: /etc/ansible/templates/ntp.conf 
+        dest: /etc/ntp.conf
+      notify:
+        - restart ntpd
+
+    - name: Set hostname
+      hostname:
+        name: target
+
+
+
+
+  handlers:
+    - name: restart ntpd
+      service:
+        name: ntpd
+        state: restarted
