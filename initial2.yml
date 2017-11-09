@@ -1,5 +1,0 @@
-- name: test yaml
-  hosts: all
-  tasks: 
-    - name: ping
-      ping:
