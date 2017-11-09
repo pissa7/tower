@@ -1,5 +1,5 @@
 ---
-- name: initial2
+- name: test yaml
   hosts: all
   tasks: 
     ping:
