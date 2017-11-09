@@ -1,6 +1,0 @@
----
-- name: initial3 test
-  hosts: all
-  tasks:
-    - name: ping pong again
-      ping:
