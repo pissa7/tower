@@ -5,4 +5,4 @@
     - name: stop ssh service temporary
       service:
         name: ssh
-        state: disabled
+        state: stopped
