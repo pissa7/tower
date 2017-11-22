@@ -3,5 +3,6 @@
   hosts: all
   tasks:
     - name: stop ssh service temporary
-      service: ssh
+      service:
+        name: ssh
         state: disabled
